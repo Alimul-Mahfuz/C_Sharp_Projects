@@ -146,7 +146,7 @@ namespace ConsoleApplication_Lab_Task_Mid
                         break;
                     default:
                         {
-                            Console.WriteLine("No valid choice entered");
+                            Console.WriteLine("No valid choice entered"); //For no valid input
                         }
                         break;
                 }
