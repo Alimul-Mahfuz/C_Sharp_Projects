@@ -1,0 +1,257 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LabTask2
+{
+    class Program
+    {
+        //Account Class Declearation
+        class Account
+        {
+            private string accName;
+            private string acid;
+            private double balance;
+            public Account()
+            {
+                //Empty default Constructor
+            }
+            public Account(string a, string b,double c) //Parameterized constractor
+            {
+                accName = a;
+                acid = b;
+                balance = c;
+            }
+            //setter and getter funciton
+            public void setaccName(string name)
+            {
+                accName = name;  
+            }
+            public void setacid(string id)
+            {
+                acid = id;
+            }
+            public string getaccName(){
+                return accName;
+            }
+            public string getacid()
+            {
+                return acid;
+            }
+            public void setbalance(double balance)
+            {
+                this.balance = balance;
+            }
+            public double getbalance()
+            {
+                return balance;
+            }
+            public void showinfo()
+            {
+                Console.WriteLine("Accont Name: " + getaccName());
+                Console.WriteLine("Current Balance: " + getbalance());
+            }
+            //Three funciton decleration
+            public void Deposit(double amount) //For deposite amount to account
+            {
+                double curr = getbalance();
+                curr = curr + amount;
+                setbalance(curr);
+                Console.WriteLine(getaccName() + " Deposited  " + amount);
+            }
+    
+            public void withdraw(double amount) //For withdrawing cash
+            {
+                double curr = getbalance();
+                curr = curr - amount;
+                setbalance(curr);
+            }
+            //Tranfer function to transfer balance form one account to another
+            public void Transfer(double amount, Account receiver)
+            {
+                double curr = getbalance();
+                double prev=curr;
+                curr = curr - amount;
+                setbalance(curr);
+                double curr2 = receiver.getbalance();
+                double prev2 = curr2;
+                curr2 = curr2 + amount;
+                receiver.setbalance(curr2);
+                Console.WriteLine("Transfer Completed");
+                Console.WriteLine();
+                Console.WriteLine("Sender:");
+                Console.WriteLine("Accont Name: "+getaccName());
+                Console.WriteLine("Account ID:" + getacid());
+                Console.WriteLine("Previous Account Balance: " + prev);
+                Console.WriteLine("Current Account Balance: " + getbalance());
+                Console.WriteLine();
+                Console.WriteLine("Reciever:");
+                Console.WriteLine("Accont Name: " + receiver.getaccName());
+                Console.WriteLine("Account ID:" + receiver.getacid());
+                Console.WriteLine("Previous Account Balance: " + prev2);
+                Console.WriteLine("Current Account Balance: " + receiver.getbalance());
+
+            }
+        }
+
+        //Class Book
+        class Book
+        {  
+            //Book class data member
+            private string bookName;
+            private string bookAuthor;
+            public string bookId;
+            private string bookType;
+            private int bookCopy; // How many books counter
+            static int bookCounter;  //Static data member for counting Book's objects
+
+            //Default empty constructor
+            public Book()
+            {
+                //Default Book Class constructor
+                bookCounter++;
+            }
+            void AddBookCopy(int x)
+            {
+                bookCopy = x; //how many copy of book 
+            }
+            public Book(string a, string b, string c, string d, int e) //Parameterized constructor of Book Class
+            {
+                bookName = a;
+                bookAuthor = b;
+                bookId = c;
+                bookType = d;
+                bookCopy = e;
+                bookCounter++;
+            }
+            public void ShowInfo()  //Showinfo function for showing data
+            {
+                Console.WriteLine("Book Name: " + bookName);
+                Console.WriteLine("Book Author: " + bookAuthor);
+                Console.WriteLine("Book ID: " + bookId);
+                Console.WriteLine("Book Type: " + bookType);
+                Console.WriteLine("Book Copy: " + bookCopy);
+                Console.WriteLine();
+                
+            }
+            public static void showTotalBookInfo()  //Showing objects count of Book's Class
+            {
+                Console.WriteLine("Total  " + bookCounter + "  Book's Objects created");
+            }
+        }
+
+        //Contact class
+        class Contact
+        {
+            //Constact class data member
+            private string personName;
+            private string personId;
+            private int age;
+            private string mobileNumber;
+            private char gender; //M or F
+
+            //Default Constructor
+            public Contact()
+            {
+                //Default constractor
+            }
+            public Contact(string a, string b, int c,string d, char e)
+            {
+                personName = a;
+                personId = b;
+                age = c;
+                mobileNumber = d;
+                gender = e;
+
+            }
+
+            public string getmobileNumber()
+            {
+                return mobileNumber;
+            }
+            public void ShowPersonInfo()
+            {
+                Console.WriteLine("User Name: "+personName);
+                Console.WriteLine("User ID: "+personId);
+                Console.WriteLine("User Age: "+age);
+                Console.WriteLine("User mobile Number: "+mobileNumber);
+                Console.WriteLine("User Gender: "+gender);
+                Console.WriteLine("User Operator: "+DetectMobileOperator());
+                Console.WriteLine();
+            }
+            public string DetectMobileOperator()  //Detecting Moblie Phone Operator
+            {
+                string ip;
+                const string robi = "018";
+                const string gp = "017";
+                const string gp2 = "013";
+                const string banglalink = "019";
+                const string banglalink2 = "014";
+                string cmp = getmobileNumber().Substring(0, 3);
+                switch (cmp)
+                {
+                    case robi: ip = "Robi";
+                        break;
+                    case gp: ip = "GrameenPhone";
+                        break;
+                    case gp2: ip = "GrameenPhone";
+                        break;
+                    case banglalink: ip = "Banglalink";
+                        break;
+                    case banglalink2: ip = "Banglalink";
+                        break;
+                    default:
+                        ip = "No valid operator";
+                        break;
+            
+                }
+                return ip;
+            }
+        }
+        
+        static void Main(string[] args)
+        {
+            //Accont
+            Account account = new Account("Nafisa Molla", "017844646464", 50000);
+            account.showinfo();
+            account.Deposit(5000);
+            Console.WriteLine("Current Balance: " + account.getbalance());
+            Console.WriteLine();
+            Account account2 = new Account("Alimul Mahfuz", "015454565656", 10000);
+            account2.showinfo();
+            account2.Deposit(500);
+            Console.WriteLine("Current Balance: " + account2.getbalance());
+            Console.WriteLine();
+            Console.WriteLine();
+            //Tansferring balance form account to account2
+            account.Transfer(5000, account2);
+            Console.WriteLine();
+            Console.WriteLine();
+
+            //Book
+            Book book1 = new Book("Harry Potter", "J.K Rowling", "011A", "Fantasy", 2);
+            Book book2 = new Book("Sherlock Holmes", "Sir Arthur Conan Doyle", "012A", "Fiction", 5);
+            Book book3 = new Book("Hamlet", "Wiliam Shakespeare", "013B", "Romantic", 4);
+            Book book4 = new Book("Gulliver's Travels", "Lemuel Gulliver", "011D", "Fantasy", 8);
+            book1.ShowInfo();
+            book2.ShowInfo();
+            book3.ShowInfo();
+            book4.ShowInfo();
+            Book.showTotalBookInfo();
+
+            //Contact
+            Console.WriteLine();
+            Contact contact1 = new Contact("Tushar", "AAC23", 25, "01316400626", 'M');
+            Contact contact2 = new Contact("Ahnaf", "AAB23", 22, "01916400623", 'M');
+            Contact contact3 = new Contact("Hossain", "AAC25", 23, "01816400626", 'M');
+            contact1.ShowPersonInfo();
+            contact2.ShowPersonInfo();
+            contact3.ShowPersonInfo();
+
+            Console.ReadKey();
+
+        }
+    }
+}

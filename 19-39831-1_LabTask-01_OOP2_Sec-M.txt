@@ -1,0 +1,210 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+// Alimul Mahfuz Tushar ID: 19-39831-1 Object Oriented Programming 2 LabTask-1
+namespace C_Sharp_LabTask1_ID_19_39831_1
+{
+    class Program
+    {
+
+        //Class Student
+        class Student
+        {
+            private string name;
+            private string id;
+            private string department;
+            private float cgpa;
+            public void ShowInfo(){
+                Console.WriteLine("Name: "+getName());
+                Console.WriteLine("id: "+getId());
+                Console.WriteLine("Department: "+getDepartment());
+                Console.WriteLine("CGPA: "+getCGPA());
+            }
+            //Setter methods
+            public void SetName(string name){
+                this.name=name;
+            }
+            public void SetId(string id)
+            {
+                this.id = id;
+
+            }
+            public void SetDepartment(string department)
+            {
+                this.department = department;
+            }
+            public void SetCGPA(float cgpa)
+            {
+                this.cgpa = cgpa;
+            }
+            //Getter Methods
+            public string getName()
+            {
+                return name;
+            }
+            public string getDepartment()
+            {
+                return department;
+            }
+            public string getId()
+            {
+                return id;
+            }
+            public float getCGPA()
+            {
+                return cgpa;
+            }
+        }
+
+        
+        //Class Triangle
+        class Triangle
+        {
+            private int x;
+            private int y;
+            private int z;
+
+            //Parametarize Constructor for value initialization
+            public Triangle(int a, int b, int c)
+            {
+                x = a;
+                y = b;
+                z = c;
+            }
+            public void ShowInfo()
+            {
+                Console.WriteLine("X: " + x);
+                Console.WriteLine("Y: " + y);
+                Console.WriteLine("Z: " + z);
+            }
+            public void TestTriangle()
+            {
+                if (x == y && y == z&&z==x)
+                {
+                    Console.WriteLine("equilateral (3 equal sides) ");
+                }
+                if (x==y&&y!=z||y==z&&z!=x||z==x&&x!=y)
+                {
+                    Console.WriteLine("isosceles (2 equal sides) ");
+                }
+                if (x != y && y != z && z != x)
+                {
+                    Console.WriteLine("scalene (no equla sides) ");
+                }
+            }
+        }
+
+
+        //Class Account
+        class Account
+        {
+            private string accountName;
+            private string accountid;
+            private double balance;
+            public void setaccountName(string accountName)
+            {
+                this.accountName = accountName;
+            }
+            public void setaccountid(string accountid)
+            {
+                this.accountid = accountid;
+            }
+            public void setbalance(double balance)
+            {
+                this.balance = balance;
+            }
+            public string getaccountName()
+            {
+                return accountName;
+            }
+            public string getaccountid()
+            {
+                return accountid;
+            }
+            public double getbalance()
+            {
+                return balance;
+            }
+            public double Deposit(double amount)
+            {
+                double cur = getbalance();
+                setbalance(cur+amount);
+                Console.WriteLine(amount + " balance added to your account");
+                return getbalance();
+                
+            }
+            public double Withdraw(double amount)
+            {
+                double witd = getbalance();
+                setbalance(witd - amount);
+                Console.WriteLine(amount + " balance withdrawed from you account");
+                return getbalance();
+            }
+            public void ShowDetails()
+            {
+                Console.WriteLine("Account Name: " + getaccountName());
+                Console.WriteLine("Account Id: " + getaccountid());
+                Console.WriteLine("Account Balance: " + getbalance());
+            }
+        }
+
+
+        //Main method
+        static void Main(string[] args)
+        {
+            //Showing from Student class
+            Student student = new Student();
+            student.SetName("Alimul Mahfuz Tushar");
+            student.SetId("19-39831-1");
+            student.SetDepartment("CSE");
+            student.SetCGPA((float)3.78);
+            student.ShowInfo();
+
+            Console.WriteLine();
+            Console.WriteLine();
+
+            //Showing from Triangle class
+            //TestTriangel for equilateral triangle input sequence 1
+            Triangle triangle1 = new Triangle(5, 5, 5);
+            triangle1.ShowInfo();
+            triangle1.TestTriangle();
+            Console.WriteLine();
+            //Test Triangle for isosceles triangle input sequence 2
+            Triangle triangle2 = new Triangle(5,10,5);
+            triangle2.ShowInfo();
+            triangle2.TestTriangle();
+            Console.WriteLine();
+            //TestTriangel for scalene triangel input sequence 3  
+            Triangle triangle3 = new Triangle(5,10,15);
+            triangle3.ShowInfo();
+            triangle3.TestTriangle();
+
+            Console.WriteLine();
+            Console.WriteLine();
+
+            //Showing from Account Class
+            Account account = new Account();
+            account.setaccountName("Alimul Mahfuz Tushar");
+            account.setaccountid("19398311");
+            account.setbalance(5985.75);
+            //Showing details before withdraw and additional deposite
+            account.ShowDetails();
+            Console.WriteLine();
+            //Adding 50000.45 as Additional deposite
+            account.Deposit(50000.45);
+            account.ShowDetails();
+            Console.WriteLine();
+            //Withdrawing 50000.45 from Current Deposit Balance 
+            account.Withdraw(50000.45);
+            account.ShowDetails();
+            Console.WriteLine();
+
+
+            Console.ReadKey();
+
+            
+        }
+    }
+}
